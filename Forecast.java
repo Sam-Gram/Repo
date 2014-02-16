@@ -5,22 +5,34 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- *
+ * This will fetch the Forecast for an area
+ * @version 0.1 
+ * @author Sam Graham
  */
 public class Forecast extends JFrame
 {
+    /**
+     * Main class
+     */ 
     public static void main(String[] args)
     {
 	new Forecast();
     }
 
 
+    /**
+     * Filename of file containing the zip code of the area
+     */ 
     private static final String FILE_NAME = "zip.txt";
 
+    /**
+     * Forecast method
+     */ 
     public Forecast()
     {
         setTitle("Forecast");
-        setSize(500,500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
 	String zipCode = "";
 
         File zipFile = new File(FILE_NAME);
@@ -44,10 +56,7 @@ public class Forecast extends JFrame
 	}
 
 
-        JTextArea myTextArea = new JTextArea();
-        myTextArea.setLineWrap(true);
-
-
+        JTextArea myTextArea = new JTextArea(30,30);
 
         URL url;
 	InputStream is = null;
@@ -61,20 +70,19 @@ public class Forecast extends JFrame
             String currentLine = "";
 	    while ((currentLine = br.readLine()) != null)
 	    {
-	       myTextArea.append(currentLine);
-               System.out.println("Hello");
+	       myTextArea.append(currentLine.replaceAll("<[^>]*>", ""));
+	       
 	    }
 	}
         catch(Exception e)
 	{
-        
+           System.out.println(e.getMessage());
 	}
 	
-       
-        myTextArea.setEditable(true);
-        getContentPane().setLayout(null);
-        getContentPane().add(myTextArea);
-
+        JButton east = new JButton("Sam");
+        myTextArea.setLineWrap(true);
+        getContentPane().add(BorderLayout.CENTER, myTextArea);
+        setSize(500,500);
         setVisible(true);
     }
 }
