@@ -1,7 +1,7 @@
 /***************
 * Sam Graham
 * This is from an interview I had recently.
-* The goal is to switch around and integer using only math operations
+* The goal is to switch around an integer using only math operations
 * no strings allowed!!
 ****************/
 
